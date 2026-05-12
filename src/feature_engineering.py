@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 import joblib, os
 def add_features(df):
     df['day_of_week'] = df['date'].dt.dayofweek
+    # weekend feature 
     weekend_days = [5, 6]  # 5=Saturday, 6=Sunday
     df['is_weekend'] = df['day_of_week'].isin(weekend_days).astype(int)
     return df
@@ -19,3 +20,4 @@ def prepare_features(df, target='sales_qty', test_size=0.2, random_state=42):
     joblib.dump(item_le,  'models/item_le.pkl')
     return train_test_split(X, y, test_size=test_size, 
 random_state=random_state)
+
